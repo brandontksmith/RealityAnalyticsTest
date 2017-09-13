@@ -1,5 +1,10 @@
 # RATest
 
+Install the dependencies from the provided package.json and test the application
+by simply using npm.
+
+Technologies: Bootstrap 3, Angular 4 (TypeScript), Chart.js w/ an Angular Chart Module,
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.1.
 
 ## Development server

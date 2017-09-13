@@ -1,20 +1,116 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container container-fluid">
+	<div class="logo text-center">
+		<img src="http://surgesolutionsllc.com/images/logo.png" width="125" alt="Surge Solutions" />
+		<p>Creator: Brandon Smith<br />btks@brandontksmith.com<br />Cell: (443) 500-8350</p>
+	</div>
+	
+	<div id="chart" *ngIf="products.length > 0">
+		<h4 class="text-center">Number of Sales by Month per Product</h4>
+		<chart #chart [type]="type" [data]="data" [options]="options"></chart>
+	</div>
+	
+	<hr />
+	
+	<div class="row">
+		<div class="col-sm-3">
+			<div class="form-group">
+				<label for="product">Product Name</label>
+				<input type="text" [(ngModel)]="model.productName" name="product" class="form-control" />
+			</div>
+		</div>
+		
+		<div class="col-sm-1">
+			<div class="form-group">
+				<label for="x">Jan</label>
+				<input type="number" [(ngModel)]="model.data.january" name="january" class="form-control" />
+			</div>
+		</div>
+		
+		<div class="col-sm-1">
+			<div class="form-group">
+				<label for="x">Feb</label>
+				<input type="number" [(ngModel)]="model.data.february" name="february" class="form-control" />
+			</div>
+		</div>
+		
+		<div class="col-sm-1">
+			<div class="form-group">
+				<label for="x">March</label>
+				<input type="number" [(ngModel)]="model.data.march" name="march" class="form-control" />
+			</div>
+		</div>
+		
+		<div class="col-sm-1">
+			<div class="form-group">
+				<label for="x">April</label>
+				<input type="number" [(ngModel)]="model.data.april" name="april" class="form-control" />
+			</div>
+		</div>
+		
+		<div class="col-sm-1">
+			<div class="form-group">
+				<label for="x">May</label>
+				<input type="number" [(ngModel)]="model.data.may" name="may" class="form-control" />
+			</div>
+		</div>
+		
+		<div class="col-sm-1">
+			<div class="form-group">
+				<label for="x">June</label>
+				<input type="number" [(ngModel)]="model.data.june" name="june" class="form-control" />
+			</div>
+		</div>
 
+		<div class="col-sm-1">
+			<div class="form-group">
+				<label for="x">July</label>
+				<input type="number" [(ngModel)]="model.data.july" name="july" class="form-control" />
+			</div>
+		</div>
+		
+		<div class="col-sm-1">
+			<div class="form-group">
+				<label for="x">Aug</label>
+				<input type="number" [(ngModel)]="model.data.august" name="august" class="form-control" />
+			</div>
+		</div>
+		
+		<div class="col-sm-1">
+			<div class="form-group">
+				<label for="x">Sep</label>
+				<input type="number" [(ngModel)]="model.data.september" name="september" class="form-control" />
+			</div>
+		</div>
+	</div>
+	
+	<div class="btn btn-primary" (click)="addProduct()">Add Product</div>
+	
+	<hr />
+	
+	<table *ngIf="products.length > 0" class="table">
+		<tr>
+			<th>Product</th>
+			<th>January</th>
+			<th>February</th>
+			<th>March</th>
+			<th>April</th>
+			<th>May</th>
+			<th>June</th>
+			<th>July</th>
+			<th>August</th>
+			<th>September</th>
+		</tr>
+		<tr *ngFor="let product of products; let i = index">
+			<td><input type="text" [(ngModel)]="product.productName" value="{{ product.productName }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="product.data.january" value="{{ product.data.january }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="product.data.february" value="{{ product.data.february }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="product.data.march" value="{{ product.data.march }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="product.data.april" value="{{ product.data.april }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="product.data.may" value="{{ product.data.may }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="product.data.june" value="{{ product.data.june }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="product.data.july" value="{{ product.data.july }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="product.data.august" value="{{ product.data.august }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+			<td><input type="number" [(ngModel)]="product.data.september" value="{{ product.data.september }}" (ngModelChange)="productChanged($event, i, product)" class="form-control" /></td>
+		</tr>
+	</table>
+</div>
